@@ -62,7 +62,7 @@ Green Gold TV
 Mr Bean Animated
 
 #Infotainment
-Discovery -Turbo -Science
+=Discovery
 Animal Planet
 Adventure Earth
 Sony BBC Earth
