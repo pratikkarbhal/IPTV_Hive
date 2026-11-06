@@ -2,7 +2,7 @@
 # Replace these examples with the channels you want.
 
 #Marathi news
-ABP Majha
+abp Majha
 TV9 Marathi
 News18 Marathi
 NDTV Marathi
