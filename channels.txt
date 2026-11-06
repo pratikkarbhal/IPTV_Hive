@@ -1,0 +1,6 @@
+# One channel per line. Case-insensitive, matches part of the channel name or tvg-id.
+# Replace these examples with the channels you want.
+Aaj Tak
+NDTV India
+DD National
+Zee News
