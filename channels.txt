@@ -5,7 +5,6 @@
 # No check:   start with !  -> use the first match without testing it
 #   !Channel Name            (for streams that only work from your country)
 #   !=Discovery              (can be combined with =)
-Aaj Tak Hindi | Aaj Tak HD | AajTak
 
 #Marathi news
 ABP Majha
