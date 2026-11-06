@@ -47,6 +47,8 @@ https://drk6xq0vhn.gpcdn.net/live/discovery_kids_abr/index.m3u8
 https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8
 #EXTINF:-1 tvg-id="MrBeanAnimated.uk@English" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png" group-title="Animation;Kids",Mr Bean Animated (1080p)
 https://amg00627-amg00627c23-samsung-au-4110.playouts.now.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="DiscoveryChannel.in@SD" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG002E9L1W.png?lock=720x540" group-title="Entertainment",Discovery Channel (India) (720p)
+https://drk6xq0vhn.gpcdn.net/live/discovery_sd_abr/index.m3u8
 #EXTINF:-1 tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/400/-/Animal_Planet_HD.png" group-title="Infotainment", Animal Planet HD
 https://cc-qgrxgp51645lw.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-qgrxgp51645lw/IQJW/WBD/WildFlix_IN/WildFlix_IN.m3u8
 #EXTINF:-1 tvg-logo="https://www.sefiles.net/merchant/5511/images/site/logo_ae_300x80.png" group-title="Infotainment", Adventure Earth
