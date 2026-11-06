@@ -148,7 +148,9 @@ def resolve(args):
     """Sources in priority order; within a source, aliases in the order written.
     Stops at the first working stream."""
     line, sources = args
-    aliases = [a.strip() for a in line.split("|") if a.strip()]
+    nocheck = line.lstrip().startswith("!")          # ! = use without testing
+    body = line.lstrip().lstrip("!")
+    aliases = [a.strip() for a in body.split("|") if a.strip()]
     for i, src in enumerate(sources):
         entries = get_entries(i, src)
         seen, tries = set(), 0
@@ -165,7 +167,7 @@ def resolve(args):
                     break
                 seen.add(url)
                 tries += 1
-                if is_alive(url):
+                if nocheck or is_alive(url):
                     return line, block, url, i
     return line, None, None, None
 
@@ -179,7 +181,8 @@ def main():
 
     out, used = [], set()
     for line, block, url, src in results:
-        term = line.split("|")[0].strip()
+        unchecked = line.lstrip().startswith("!")
+        term = line.lstrip().lstrip("!").split("|")[0].strip()
         if url is None:
             print(f"DEAD   {term} (nothing worked in any source)")
             continue
@@ -188,6 +191,8 @@ def main():
             continue
         used.add(url)
         note = "" if src == 0 else " [backup source]"
+        if unchecked:
+            note += " [unchecked]"
         print(f"OK     {term} -> {clean_name(block)} (source {src + 1}){note}")
         out.append((block, url))
 
