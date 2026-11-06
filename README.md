@@ -38,6 +38,7 @@ One line is one channel in your playlist.
 | `=Discovery` | Exact name only. Finds "Discovery", not "Discovery Turbo" |
 | `Discovery -Turbo` | Excludes channels with that word |
 | `Aaj Tak Hindi \| AajTak` | Alternative names for the same channel, tried in order |
+| `!Channel Name` | No stream check. Uses the first match as is. For streams that only work from your country |
 
 Lines starting with `#` are ignored.
 
@@ -52,3 +53,4 @@ Lines starting with `#` are ignored.
 - Streams are checked from GitHub's US servers, so streams that only work from some countries may be dropped.
 - Channels with no working stream are left out and shown as `DEAD` in the Actions log.
 - If nothing works at all, the old playlist is kept.
+- 
