@@ -55,7 +55,7 @@ Zee South Flix
 Colors Cineplex
 Sony Max
 Zee Cinema
-Star Gold
+=Star Gold
 Goldmines
 
 #kids
@@ -65,7 +65,7 @@ Nickelodeon
 Nick Jr
 Disney Channel
 Disney Junior
-Sonic
+=Sonic
 Discovery Kids
 Green Gold TV
 Mr Bean Animated
