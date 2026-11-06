@@ -64,14 +64,34 @@ def tokens(text):
     return re.findall(r"[a-z0-9]+", text.lower())
 
 
+def raw_name(block):
+    return extinf(block).split(",", 1)[-1]
+
+
+def tvg_id(block):
+    m = re.search(r'tvg-id="([^"]*)"', extinf(block))
+    return m.group(1) if m else ""
+
+
+def parse_term(term):
+    """'=Discovery' -> exact; '-Turbo' -> exclude word. Returns (exact, words, exclude)."""
+    term = term.strip()
+    exact = term.startswith("=")
+    parts = term.lstrip("=").split()
+    exclude = set(tokens(" ".join(p[1:] for p in parts if p.startswith("-"))))
+    words = tokens(" ".join(p for p in parts if not p.startswith("-")))
+    return exact, words, exclude
+
+
 def matches(term, block):
-    """True if every word of the term is in the channel name/tvg-id (any order),
-    or the term without spaces appears in it (Aaj Tak ~ AajTak)."""
-    text = search_text(block)
-    words = tokens(term)
+    exact, words, exclude = parse_term(term)
     if not words:
         return False
-    toks = tokens(text)
+    if exclude & set(tokens(raw_name(block))):
+        return False
+    if exact:  # whole channel name (tags like (720p) ignored) or tvg-id must equal the term
+        return words == tokens(clean_name(block)) or words == tokens(tvg_id(block))
+    toks = tokens(search_text(block))
     if set(words) <= set(toks):
         return True
     # spelling without spaces: "AajTak" equals consecutive words "Aaj" + "Tak"
@@ -133,10 +153,10 @@ def resolve(args):
         entries = get_entries(i, src)
         seen, tries = set(), 0
         for alias in aliases:
-            want = " ".join(tokens(alias))
+            want = parse_term(alias)[1]
             cands = [(b, u) for b, u in entries if matches(alias, b)]
             # exact channel name first, then shorter (closer) names
-            cands.sort(key=lambda c: (" ".join(tokens(clean_name(c[0]))) != want,
+            cands.sort(key=lambda c: (tokens(clean_name(c[0])) != want,
                                       len(clean_name(c[0]))))
             for block, url in cands:
                 if url in seen:
