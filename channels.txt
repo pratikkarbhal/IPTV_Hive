@@ -1,5 +1,5 @@
 # One channel per line. Case-insensitive, matches part of the channel name or tvg-id.
-# Replace these examples with the channels you want.
+# For multiple name use | like abpmaza |abpmajha |abp majha
 
 #Marathi news
 ABP Majha
