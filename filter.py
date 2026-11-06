@@ -1,14 +1,18 @@
 import re
 import sys
+import threading
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 SOURCES_FILE = "sources.txt"   # playlist URLs, highest priority first
-WANTED_FILE = "channels.txt"
+WANTED_FILE = "channels.txt"   # one channel per line = one entry in the output
 OUTPUT = "playlist.m3u"
 TIMEOUT = 10                   # seconds per stream check
 WORKERS = 20
+MAX_TRIES_PER_SOURCE = 5       # max candidates tested per channel per source
 HEADERS = {"User-Agent": "Mozilla/5.0"}
+
+_cache, _lock = {}, threading.Lock()
 
 
 def read_list(path):
@@ -48,11 +52,24 @@ def search_text(block):
     return f"{line.split(',', 1)[-1]} {tvg_id}".lower()
 
 
-def group_key(block):
-    """Same channel across sources: name without (720p) / [Geo-blocked] tags."""
+def clean_name(block):
+    """Channel name without (720p) / [Geo-blocked] tags."""
     name = extinf(block).split(",", 1)[-1]
     name = re.sub(r"[\(\[].*?[\)\]]", "", name)
     return re.sub(r"\s+", " ", name).strip().lower()
+
+
+def get_entries(i, url):
+    """Download a source only when it is first needed."""
+    with _lock:
+        if i not in _cache:
+            try:
+                _cache[i] = parse(fetch(url))
+                print(f"Loaded source {i + 1}: {len(_cache[i])} streams")
+            except Exception as e:
+                print(f"WARNING: could not load source {i + 1}: {e}")
+                _cache[i] = []
+        return _cache[i]
 
 
 def is_alive(url):
@@ -72,54 +89,44 @@ def is_alive(url):
         return False
 
 
-def pick(item):
-    key, cands = item
-    for n, (block, url, src) in enumerate(cands):
-        if is_alive(url):
-            return key, block, url, src, n, len(cands)
-    return key, None, None, None, None, len(cands)
+def resolve(args):
+    """Go through sources in priority order; stop at the first working stream."""
+    term, sources = args
+    t = term.lower()
+    for i, src in enumerate(sources):
+        cands = [(b, u) for b, u in get_entries(i, src) if t in search_text(b)]
+        # exact channel name first, then shorter (closer) names
+        cands.sort(key=lambda c: (clean_name(c[0]) != t, len(clean_name(c[0]))))
+        seen = set()
+        for block, url in cands:
+            if url in seen:
+                continue
+            seen.add(url)
+            if len(seen) > MAX_TRIES_PER_SOURCE:
+                break
+            if is_alive(url):
+                return term, block, url, i
+    return term, None, None, None
 
 
 def main():
-    wanted = [w.lower() for w in read_list(WANTED_FILE)]
+    terms = read_list(WANTED_FILE)
     sources = read_list(SOURCES_FILE)
 
-    groups, matched, rank = {}, set(), {}
-    for i, src in enumerate(sources):
-        try:
-            entries = parse(fetch(src))
-        except Exception as e:
-            print(f"WARNING: could not load source {i + 1}: {e}")
-            continue
-        print(f"Source {i + 1}: {len(entries)} streams")
-        for block, url in entries:
-            text = search_text(block)
-            hits = [w for w in wanted if w in text]
-            if not hits:
-                continue
-            matched.update(hits)
-            key = group_key(block)
-            rank[key] = min(rank.get(key, 10**6), min(wanted.index(h) for h in hits))
-            cands = groups.setdefault(key, [])
-            if all(url != c[1] for c in cands):
-                cands.append((block, url, i))
-
-    for w in wanted:
-        if w not in matched:
-            print(f"WARNING: no match for '{w}'")
-
-    print(f"Checking {len(groups)} channels...")
     with ThreadPoolExecutor(WORKERS) as ex:
-        results = list(ex.map(pick, groups.items()))
-    results.sort(key=lambda r: (rank[r[0]], r[0]))  # follow channels.txt order
+        results = list(ex.map(resolve, [(t, sources) for t in terms]))  # keeps channels.txt order
 
-    out = []
-    for key, block, url, src, n, total in results:
+    out, used = [], set()
+    for term, block, url, src in results:
         if url is None:
-            print(f"DEAD   {key} (all {total} URLs failed)")
+            print(f"DEAD   {term} (nothing worked in any source)")
             continue
-        note = "" if n == 0 else f" [backup #{n} used]"
-        print(f"OK     {key} (source {src + 1}){note}")
+        if url in used:
+            print(f"SKIP   {term} (same stream already added)")
+            continue
+        used.add(url)
+        note = "" if src == 0 else " [backup source]"
+        print(f"OK     {term} -> {clean_name(block)} (source {src + 1}){note}")
         out.append((block, url))
 
     if not out:
