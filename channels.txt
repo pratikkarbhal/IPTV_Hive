@@ -68,6 +68,10 @@ Green Gold TV
 Mr Bean Animated
 
 #Infotainment
+TLC
+Xplore
+Food Food
+INWILD
 Discovery Channel
 Animal Planet
 Adventure Earth
@@ -76,12 +80,10 @@ History TV18
 Modern Marvels
 Discovery Turbo
 Discovery Science
-TLC
-Xplore
-Food Food
 
 #Extras
 MotorVision
 PowerNation
+InWonder
 Red Bull
 Watch Mojo
