@@ -1,41 +1,79 @@
 # One channel per line. Case-insensitive, matches part of the channel name or tvg-id.
 # Replace these examples with the channels you want.
+
+#Marathi news
 ABP Majha
+TV9 Marathi
 News18 Marathi
 NDTV Marathi
-TV9 Marathi
 Zee 24 Tass
 Jai Maharashtra
+#Marathi movies
 Zee Talkies
 ZEE Chitra Mandir
+
+#Marathi entertainment
+Shemaroo Marathi Bana
 Fakt Marathi
 Zee Yuva
-Shemaroo Marathi Bana
 DD Sahyadri
-Sony Marathi
-Zee Marathi
-Colors Marathi
 Sun Marathi
+Zee Marathi
 Star Pravah
-Maiboli
+Colors Marathi
+Sony Marathi
+
+#Marathi songs
 9x Jhakaas
+Maiboli
 Sangeet Marathi
-Sony Sab
-Sony Wah
+
+#Hindi entertainment
+Zee Comedy
 Zee Horror
+Sony Pal
+Sony Wah
+Sony Sab
+Sony Entertainment Television
+
+#Hindi movies
 Shemaroo Bollywood
+B4U Movies
+B4U Kadak
+Zee South Flix
+Colors Cineplex
+Sony Max
 Zee Cinema
+Star Gold
+Goldmines
+
+#kids
 Cartoon Network
+Pogo
+Nickelodeon
+Nick Jr
+Disney Channel
+Disney Junior
+Sonic
 Discovery Kids
-Watch Mojo
+Green Gold TV
+Mr Bean Animated
+
+#Infotainment
+Discovery
+Animal Planet
+Adventure Earth
+Sony BBC Earth
 History TV18
 Modern Marvels
-Discovery Science
 Discovery Turbo
-Discovery
-Red Bull
-PowerNation
-MotorVision
-Adventure Earth
+Discovery Science
+TLC
 Xplore
-Animal Planet
+Food Food
+
+#Extras
+MotorVision
+PowerNation
+Red Bull
+Watch Mojo
