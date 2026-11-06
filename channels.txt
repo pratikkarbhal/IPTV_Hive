@@ -1,4 +1,6 @@
 # One channel per line. Case-insensitive, matches part of the channel name or tvg-id.
+# For exact search use = like =DiscoveryChannel
+# For adding exception use - like Discovery -Turbo -Science
 # For multiple name use | like abpmaza |abpmajha |abp majha
 
 #Marathi news
@@ -60,7 +62,7 @@ Green Gold TV
 Mr Bean Animated
 
 #Infotainment
-Discovery
+Discovery | Discovery Hindi -Turbo -Science
 Animal Planet
 Adventure Earth
 Sony BBC Earth
