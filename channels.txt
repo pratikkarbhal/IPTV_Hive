@@ -2,6 +2,10 @@
 # For exact search use = like =DiscoveryChannel
 # For adding exception use - like Discovery -Turbo -Science
 # For multiple name use | like abpmaza |abpmajha |abp majha
+# No check:   start with !  -> use the first match without testing it
+#   !Channel Name            (for streams that only work from your country)
+#   !=Discovery              (can be combined with =)
+Aaj Tak Hindi | Aaj Tak HD | AajTak
 
 #Marathi news
 ABP Majha
@@ -35,14 +39,14 @@ Maiboli
 Sangeet Marathi
 
 #Hindi entertainment
-Zee Comedy Nation
-Zee Horror Nights
+!Zee Comedy Nation
+!Zee Horror Nights
 Sony Pal
 Sony Wah
 Sony Sab
 Sony Entertainment Television
-Zee South Flix
-Zee Cine Classic
+!Zee South Flix
+!Zee Cine Classic
 
 #Hindi movies
 Shemaroo Bollywood
