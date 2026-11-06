@@ -1,5 +1,41 @@
 # One channel per line. Case-insensitive, matches part of the channel name or tvg-id.
 # Replace these examples with the channels you want.
 ABP Majha
+News18 Marathi
 NDTV Marathi
+TV9 Marathi
+Zee 24 Tass
+Jai Maharashtra
+Zee Talkies
+ZEE Chitra Mandir
+Fakt Marathi
+Zee Yuva
+Shemaroo Marathi Bana
+DD Sahyadri
+Sony Marathi
+Zee Marathi
+Colors Marathi
+Sun Marathi
+Star Pravah
+Maiboli
 9x Jhakaas
+Sangeet Marathi
+Sony Sab
+Sony Wah
+Zee Horror
+Shemaroo Bollywood
+Zee Cinema
+Cartoon Network
+Discovery Kids
+Watch Mojo
+History TV18
+Modern Marvels
+Discovery Science
+Discovery Turbo
+Discovery
+Red Bull
+PowerNation
+MotorVision
+Adventure Earth
+Xplore
+Animal Planet
