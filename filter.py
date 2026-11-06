@@ -5,7 +5,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 SOURCES_FILE = "sources.txt"   # playlist URLs, highest priority first
-WANTED_FILE = "channels.txt"   # one channel per line = one entry in the output
+WANTED_FILE = "channels.txt"   # one line = one channel; separate alternative names with |
 OUTPUT = "playlist.m3u"
 TIMEOUT = 10                   # seconds per stream check
 WORKERS = 20
@@ -52,6 +52,41 @@ def search_text(block):
     return f"{line.split(',', 1)[-1]} {tvg_id}".lower()
 
 
+def matches(term, block):
+    """Match if the term is a substring, or all its words appear in the name (any order, extra words allowed)."""
+    text = search_text(block)
+    if term in text:
+        return True
+    return set(re.findall(r"\w+", term)) <= set(re.findall(r"\w+", text))
+
+
+def tokens(text):
+    return re.findall(r"[a-z0-9]+", text.lower())
+
+
+def matches(term, block):
+    """True if every word of the term is in the channel name/tvg-id (any order),
+    or the term without spaces appears in it (Aaj Tak ~ AajTak)."""
+    text = search_text(block)
+    words = tokens(term)
+    if not words:
+        return False
+    toks = tokens(text)
+    if set(words) <= set(toks):
+        return True
+    # spelling without spaces: "AajTak" equals consecutive words "Aaj" + "Tak"
+    joined = "".join(words)
+    for a in range(len(toks)):
+        run = ""
+        for b in range(a, len(toks)):
+            run += toks[b]
+            if run == joined:
+                return True
+            if len(run) >= len(joined):
+                break
+    return False
+
+
 def clean_name(block):
     """Channel name without (720p) / [Geo-blocked] tags."""
     name = extinf(block).split(",", 1)[-1]
@@ -90,23 +125,29 @@ def is_alive(url):
 
 
 def resolve(args):
-    """Go through sources in priority order; stop at the first working stream."""
-    term, sources = args
-    t = term.lower()
+    """Sources in priority order; within a source, aliases in the order written.
+    Stops at the first working stream."""
+    line, sources = args
+    aliases = [a.strip() for a in line.split("|") if a.strip()]
     for i, src in enumerate(sources):
-        cands = [(b, u) for b, u in get_entries(i, src) if t in search_text(b)]
-        # exact channel name first, then shorter (closer) names
-        cands.sort(key=lambda c: (clean_name(c[0]) != t, len(clean_name(c[0]))))
-        seen = set()
-        for block, url in cands:
-            if url in seen:
-                continue
-            seen.add(url)
-            if len(seen) > MAX_TRIES_PER_SOURCE:
-                break
-            if is_alive(url):
-                return term, block, url, i
-    return term, None, None, None
+        entries = get_entries(i, src)
+        seen, tries = set(), 0
+        for alias in aliases:
+            want = " ".join(tokens(alias))
+            cands = [(b, u) for b, u in entries if matches(alias, b)]
+            # exact channel name first, then shorter (closer) names
+            cands.sort(key=lambda c: (" ".join(tokens(clean_name(c[0]))) != want,
+                                      len(clean_name(c[0]))))
+            for block, url in cands:
+                if url in seen:
+                    continue
+                if tries >= MAX_TRIES_PER_SOURCE:
+                    break
+                seen.add(url)
+                tries += 1
+                if is_alive(url):
+                    return line, block, url, i
+    return line, None, None, None
 
 
 def main():
@@ -117,7 +158,8 @@ def main():
         results = list(ex.map(resolve, [(t, sources) for t in terms]))  # keeps channels.txt order
 
     out, used = [], set()
-    for term, block, url, src in results:
+    for line, block, url, src in results:
+        term = line.split("|")[0].strip()
         if url is None:
             print(f"DEAD   {term} (nothing worked in any source)")
             continue
