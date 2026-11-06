@@ -11,6 +11,7 @@ NDTV Marathi
 TV9 Marathi
 Zee 24 Tass
 Jai Maharashtra
+RT India
 
 #Marathi movies
 Zee Talkies
