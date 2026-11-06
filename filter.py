@@ -84,7 +84,7 @@ def main():
     wanted = [w.lower() for w in read_list(WANTED_FILE)]
     sources = read_list(SOURCES_FILE)
 
-    groups, matched = {}, set()
+    groups, matched, rank = {}, set(), {}
     for i, src in enumerate(sources):
         try:
             entries = parse(fetch(src))
@@ -98,7 +98,9 @@ def main():
             if not hits:
                 continue
             matched.update(hits)
-            cands = groups.setdefault(group_key(block), [])
+            key = group_key(block)
+            rank[key] = min(rank.get(key, 10**6), min(wanted.index(h) for h in hits))
+            cands = groups.setdefault(key, [])
             if all(url != c[1] for c in cands):
                 cands.append((block, url, i))
 
@@ -109,6 +111,7 @@ def main():
     print(f"Checking {len(groups)} channels...")
     with ThreadPoolExecutor(WORKERS) as ex:
         results = list(ex.map(pick, groups.items()))
+    results.sort(key=lambda r: (rank[r[0]], r[0]))  # follow channels.txt order
 
     out = []
     for key, block, url, src, n, total in results:
