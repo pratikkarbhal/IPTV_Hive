@@ -1,0 +1,4 @@
+# Playlist URLs, highest priority first. A channel uses the first source whose stream works.
+https://iptv-org.github.io/iptv/countries/in.m3u
+# Add more below, for example:
+# https://example.com/another-playlist.m3u
