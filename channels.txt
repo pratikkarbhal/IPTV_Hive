@@ -3,9 +3,9 @@
 
 #Marathi news
 ABP Majha
-TV9 Marathi
 News18 Marathi
 NDTV Marathi
+TV9 Marathi
 Zee 24 Tass
 Jai Maharashtra
 #Marathi movies
