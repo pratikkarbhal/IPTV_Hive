@@ -1,4 +1,5 @@
 # IPTV Hive
+[![Update playlist](https://github.com/pratikkarbhal/IPTV_Hive/actions/workflows/update-playlist.yml/badge.svg?event=check_run)](https://github.com/pratikkarbhal/IPTV_Hive/actions/workflows/update-playlist.yml)
 
 An IPTV playlist that updates itself. It picks only the channels you want from several community playlists, tests each stream, and keeps the first one that works.
 
