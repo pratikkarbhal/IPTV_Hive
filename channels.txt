@@ -58,19 +58,17 @@ Zee Cinema
 Goldmines
 
 #kids
+Green Gold TV
 Cartoon Network
 Pogo
+Hungama TV
 Nickelodeon
-Nick Jr
 Disney Channel
-Disney Junior
 =Sonic
 Discovery Kids
-Green Gold TV
 Mr Bean Animated
 
 #Infotainment
-TLC
 Xplore
 Food Food
 INWILD
@@ -87,6 +85,6 @@ Discovery Science
 MotorVision
 PowerNation
 Warner TV
-InWonder
 Red Bull
 Watch Mojo
+InWonder
