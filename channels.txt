@@ -48,13 +48,16 @@ Sony Entertainment Television
 !Zee Cine Classic
 
 #Hindi movies
-Shemaroo TV
+Shemaroo Bollywood
 B4U Movies
 B4U Kadak
 Colors Cineplex
+Colors Cineplex Bollywood
+Colors Cineplex Superhits
 Sony Max
 Zee Cinema
 =Star Gold
+&pictures
 Goldmines
 
 #kids
@@ -84,7 +87,10 @@ Discovery Science
 #Extras
 MotorVision
 PowerNation
+Star Movies
+Sony Pix
 Warner TV
+HBO
 Red Bull
 Watch Mojo
 InWonder
