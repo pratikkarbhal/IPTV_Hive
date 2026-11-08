@@ -45,12 +45,9 @@ Sony Wah
 Sony Sab
 Sony Entertainment Television
 !Zee South Flix
-!Zee Cine Classic
 
 #Hindi movies
 Shemaroo Bollywood
-B4U Movies
-B4U Kadak
 Colors Cineplex
 Colors Cineplex Bollywood
 Colors Cineplex Superhits
@@ -73,7 +70,6 @@ Mr Bean Animated
 
 #Infotainment
 Xplore
-Food Food
 INWILD
 Discovery Channel
 Animal Planet
