@@ -1,4 +1,6 @@
 import re
+import shutil
+import subprocess
 import sys
 import threading
 import urllib.request
@@ -10,9 +12,14 @@ OUTPUT = "playlist.m3u"
 TIMEOUT = 10                   # seconds per stream check
 WORKERS = 20
 MAX_TRIES_PER_SOURCE = 5       # max candidates tested per channel per source
+CHECK_VIDEO = True             # skip streams that have audio but no video
+PROBE_SLOTS = 4                # max parallel ffprobe checks (be gentle to small servers)
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 _cache, _lock = {}, threading.Lock()
+FFPROBE = shutil.which("ffprobe")
+_probe_slots = threading.BoundedSemaphore(PROBE_SLOTS)
+VIDEO_CODECS = ("avc", "hvc", "hev", "mp4v", "vp0", "vp8", "vp9", "av01", "dvh", "mpeg")
 
 
 def read_list(path):
@@ -127,21 +134,69 @@ def get_entries(i, url):
         return _cache[i]
 
 
+def hls_has_video(text):
+    """HLS playlist: True = has video, False = audio only, None = can't tell."""
+    lines = [l.strip() for l in text.splitlines()]
+    variants = [l for l in lines if l.startswith("#EXT-X-STREAM-INF")]
+    if variants:
+        unknown = False
+        for v in variants:
+            if "RESOLUTION=" in v.upper():
+                return True
+            m = re.search(r'CODECS="([^"]*)"', v, re.I)
+            if not m:
+                unknown = True
+                continue
+            if any(c.strip().lower().startswith(VIDEO_CODECS) for c in m.group(1).split(",")):
+                return True
+        return None if unknown else False
+    segs = [l for l in lines if l and not l.startswith("#")]
+    if segs and all(re.search(r"\.(aac|mp3|m4a|ac3)(\?|$)", x, re.I) for x in segs):
+        return False
+    return None
+
+
+def only_audio(url):
+    """True only if ffprobe read the stream and found audio but no video."""
+    if not FFPROBE:
+        return False
+    cmd = [FFPROBE, "-v", "error", "-analyzeduration", "3000000", "-probesize", "3000000",
+           "-rw_timeout", "8000000", "-user_agent", HEADERS["User-Agent"],
+           "-show_entries", "stream=codec_type", "-of", "csv=p=0", url]
+    with _probe_slots:
+        try:
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=20)
+        except Exception:
+            return False
+    types = set(r.stdout.split())
+    return r.returncode == 0 and "audio" in types and "video" not in types
+
+
 def is_alive(url):
     try:
         req = urllib.request.Request(url, headers=HEADERS)
         with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
             if r.status != 200:
                 return False
-            chunk = r.read(2048)
+            ctype = r.headers.get("Content-Type", "").lower()
+            is_hls = ".m3u8" in url.lower() or "mpegurl" in ctype
+            chunk = r.read(65536 if is_hls else 2048)
             if not chunk:
                 return False
-            ctype = r.headers.get("Content-Type", "").lower()
-            if ".m3u8" in url.lower() or "mpegurl" in ctype:
-                return b"#EXTM3U" in chunk
-            return True
+            if is_hls:
+                if b"#EXTM3U" not in chunk:
+                    return False
+                if CHECK_VIDEO and hls_has_video(chunk.decode("utf-8", "replace")) is False:
+                    print(f"AUDIO-ONLY skipped: {url}")
+                    return False
+                return True
     except Exception:
         return False
+    # not an HLS playlist (e.g. raw TS from Tvheadend): look inside the stream
+    if CHECK_VIDEO and only_audio(url):
+        print(f"AUDIO-ONLY skipped: {url}")
+        return False
+    return True
 
 
 def resolve(args):
