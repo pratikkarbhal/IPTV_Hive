@@ -42,62 +42,43 @@ https://amg00862-amg00862c7-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-a
 http://163.61.226.31:9981/stream/channelid/1571254341?profile=pass
 #EXTINF:-1 tvg-id="SonyWah.in@SD" tvg-logo="https://dtil.tmsimg.com/assets/s157974_ld_h15_aa.png?lock=720x540" group-title="Movies",Sony Wah (576p)
 http://163.61.226.31:9981/stream/channelid/1743466790?profile=pass
-#EXTINF:-1 tvg-id="SonySAB.in",Sony SAB
-https://drk6xq0vhn.gpcdn.net/live/sub_hd_abr/index.m3u8
 #EXTINF:-1 tvg-id="SonyEntertainmentTelevision.in",Sony Entertainment Television
 http://38.96.178.205/SONYHD/index.m3u8
 #EXTINF:-1 tvg-id="ZeeSouthFlix.in",Zee South Flix
 https://amg00862-amg00862c9-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c9-amgplt0173/playlist.m3u8
-#EXTINF:-1 tvg-id="ZeeCineClassic.in",Zee Cine Classic
-https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8
 #EXTINF:-1 tvg-id="ShemarooBollywood.us@SD" tvg-logo="https://i.imgur.com/TFxLj80.png" group-title="Undefined",Shemaroo Bollywood (1080p)
 https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00864-shemarooenterta-shemabollywood-ono/playlist.m3u8
-#EXTINF:-1 tvg-id="B4UMovies.in@India" tvg-logo="https://i.imgur.com/M9kMFJl.png" group-title="Movies",B4U Movies (1080p)
-http://103.135.253.32:8080/B4U-MOVIES/index.m3u8
-#EXTINF:-1 tvg-id="B4UKadak.in",B4U Kadak
-https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="ColorsCineplex.in",Colors Cineplex
 https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/ColorsCineplexUK.m3u8
 #EXTINF:-1 tvg-id="ColorsCineplexBollywood.in",Colors Cineplex Bollywood
 http://163.61.226.31:9981/stream/channelid/1709941389?profile=pass
 #EXTINF:-1 tvg-id="ColorsCineplexSuperhits.in",Colors Cineplex Superhits
 http://163.61.226.31:9981/stream/channelid/2039746374?profile=pass
-#EXTINF:-1 tvg-id="SonyMax.in",Sony Max
-http://103.135.253.32:8080/Sony-Max-HD/index.m3u8
-#EXTINF:-1 tvg-id="ZeeCinema.in",Zee Cinema
-http://103.135.253.32:8080/ZEE-CINEMA/index.m3u8
+#EXTINF:-1 tvg-id="ZeeCinema.in@APAC",Zee Cinema APAC (720p)
+https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8
 #EXTINF:-1 tvg-id="StarGold.in",Star Gold
 https://livetv.shamon-cable.net:8443/StarGold/index.m3u8
-#EXTINF:-1 tvg-id="Andpictures.in",&pictures
-http://103.135.253.32:8080/PICTURE-HD/index.m3u8
-#EXTINF:-1 tvg-id="Goldmines.in",Goldmines
-https://tvsen6.aynaott.com/hKrngve2/index.m3u8
 #EXTINF:-1 tvg-id="GreenGoldTV.in",Green Gold TV
 https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8
-#EXTINF:-1 tvg-id="CartoonNetwork.in",Cartoon Network
-https://drk6xq0vhn.gpcdn.net/live/cn_sd_abr/index.m3u8
-#EXTINF:-1 tvg-id="Pogo.in",Pogo
-http://103.135.253.32:8080/POGO/index.m3u8
-#EXTINF:-1 tvg-id="HungamaTV.in",Hungama TV
-http://103.135.253.32:8080/HUNGAMA/index.m3u8
-#EXTINF:-1 tvg-id="Nickelodeon.in",Nickelodeon
-http://103.135.253.32:8080/NICK/index.m3u8
+#EXTINF:-1 tvg-id="CartoonNetworkAsia.sg@Thailand" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/960px-Cartoon_Network_2010_logo.svg.png" group-title="Animation;Kids",Cartoon Network Asia Thailand
+http://103.253.74.210:7070/stream/118/index.m3u8
+#EXTINF:-1 tvg-id="NickelodeonAsia.sg@SD" tvg-logo="https://i.imgur.com/E84jnP8.png" http-user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36" group-title="Kids",Nickelodeon Asia
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36
+http://103.253.74.210:7070/stream/117/index.m3u8
 #EXTINF:-1 tvg-id="DisneyChannel.bg@SD" tvg-logo="https://i.imgur.com/UxrAiAe.png" group-title="Kids",Disney Channel (Bulgaria) (576i)
 http://87.120.179.187:8000/play/a010
-#EXTINF:-1 tvg-id="DiscoveryKids.in",Discovery Kids
-https://drk6xq0vhn.gpcdn.net/live/discovery_kids_abr/index.m3u8
+#EXTINF:-1 tvg-id="DiscoveryKidsLatinAmerica.us@Panregional" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Discovery_Kids_2021_2D_sin_wordmark.svg/960px-Discovery_Kids_2021_2D_sin_wordmark.svg.png" group-title="Kids",Discovery Kids Latin America (1080p)
+http://181.224.200.5:2277/play/a00o/index.m3u8
 #EXTINF:-1 tvg-id="MrBeanAnimated.uk@English" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png" group-title="Animation;Kids",Mr Bean Animated (1080p)
 https://amg00627-amg00627c23-samsung-au-4110.playouts.now.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="INBA4900023QJ" tvg-logo="https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/INBA4900023QJ_20220427T054726SQUARE.png_20220427054727.png" group-title="Infotainment" , Xplore
 https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8
-#EXTINF:-1 tvg-id="FoodFood.in",Food Food
-https://cdn.pishow.tv/ott/live/267/master.m3u8
 #EXTINF:-1 tvg-id="INWILD.nl@SD" tvg-logo="https://cdn.uc.assets.prezly.com/92770c71-9d6f-400f-8311-38e9cfec52c2/InWild_landscape-green.png" group-title="Documentary",INWILD (1080p)
 https://amg00861-terninternation-inwild-samsunguk-w5wic.amagi.tv/playlist/amg00861-terninternation-inwild-samsunguk/playlist.m3u8
-#EXTINF:-1 tvg-id="DiscoveryChannel.in",Discovery Channel
-https://drk6xq0vhn.gpcdn.net/live/discovery_sd_abr/index.m3u8
-#EXTINF:-1 tvg-id="AnimalPlanet.in",Animal Planet
-https://drk6xq0vhn.gpcdn.net/live/animal_planet_sd_abr/index.m3u8
+#EXTINF:-1 tvg-id="DiscoveryChannel.bg@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/2019_Discovery_logo.svg/960px-2019_Discovery_logo.svg.png" group-title="Entertainment",Discovery Channel (Bulgaria)
+http://213.91.179.28:8000/play/a044
+#EXTINF:-1 tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/400/-/Animal_Planet_HD.png" group-title="Infotainment", Animal Planet
+https://cc-qgrxgp51645lw.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-qgrxgp51645lw/IQJW/WBD/WildFlix_IN/WildFlix_IN.m3u8
 #EXTINF:-1 tvg-logo="https://www.sefiles.net/merchant/5511/images/site/logo_ae_300x80.png" group-title="Infotainment", Adventure Earth
 https://autentic-adventure-earth-1-gb.lg.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="BBCEarth.uk@US" tvg-logo="https://i.imgur.com/nGSsUd4.png" group-title="Documentary",BBC Earth US (1080p)
@@ -106,16 +87,16 @@ https://amg00793-amg00793c6-xumo-us-2669.playouts.now.amagi.tv/BBCStudios-BBCEar
 https://amg01448-amg01448c16-samsung-in-3495.playouts.now.amagi.tv/playlist/amg01448-samsungindia-historychannelhindi-samsungin/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/6/62/Modern_Marvels_title_credits.jpg" group-title="Infotainment", Modern Marvels
 https://debzvrwex1ip7.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-59uqfidguq5ol/v1/aenetworks_modernmarvels_2/samsungheadend_ca/latest/main/hls/playlist.m3u8
-#EXTINF:-1 tvg-id="DiscoveryTurbo.in",Discovery Turbo
-https://drk6xq0vhn.gpcdn.net/live/discovery_turbo_abr/index.m3u8
-#EXTINF:-1 tvg-id="DiscoveryScience.in",Discovery Science
-https://drk6xq0vhn.gpcdn.net/live/discovery_science_abr/index.m3u8
+#EXTINF:-1 tvg-id="DiscoveryTurbo.it@SD" tvg-logo="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Discovery_Turbo_Italy.svg/1920px-Discovery_Turbo_Italy.svg.png" group-title="Auto",Discovery Turbo (Italy) (1080p)
+https://streaming.aurora.enhanced.live/live/mpc/enl0eG1mLmVncmVzcy5mZDJ2eHI=/out/v1/IT_SIMULCAST/TURBO/CMAF/index.m3u8
+#EXTINF:-1 tvg-id="DiscoveryScienceLatinAmerica.us@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Discovery_science_new_logo_2017.png/960px-Discovery_science_new_logo_2017.png" group-title="Science",Discovery Science Latin America (720p)
+http://45.171.64.30:6060/play/a007/index.m3u8
 #EXTINF:-1 tvg-logo="https://www.sportstribal.tv/home/wp-content/uploads/2022/02/logo.png" group-title="Infotainment", MotorVision
 https://mvg-mv-xumo.otteravision.com/mvg/mv/mv.m3u8
 #EXTINF:-1 tvg-logo="https://www.powernationtv.com/images/brands/pn_icon_sm.png" group-title="Infotainment", PowerNation TV
 https://dbrb49pjoymg4.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/master.m3u8?ads.xumo_channelId=99991291
-#EXTINF:-1 tvg-id="StarMovies.in@HD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_STAR_MOVIES/images/LOGO_HD/image.png" group-title="Movies",Star Movies (India) HD (1080p)
-http://103.135.253.32:8080/STAR-MOVIES/index.m3u8
+#EXTINF:-1 tvg-id="StarUtsavMovies.in@SD" tvg-logo="https://i.imgur.com/k5QHfH2.png" group-title="Movies",Star Utsav Movies (576p)
+http://163.61.226.31:9981/stream/channelid/1225596390?profile=pass
 #EXTINF:-1 tvg-id="WarnerTVAsia.us@SD" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Warner2018LA.png/960px-Warner2018LA.png" http-user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" group-title="Movies",Warner TV Asia (720p)
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
 https://cdn4.skygo.mn/live/disk1/Warner/HLSv3-FTA/Warner.m3u8
