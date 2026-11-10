@@ -82,7 +82,7 @@ Discovery Science
 #Extras
 MotorVision
 PowerNation
-Star Movies
+=Star Movies
 Sony Pix
 Warner TV
 HBO
