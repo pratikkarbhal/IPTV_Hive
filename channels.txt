@@ -58,13 +58,13 @@ Zee Cinema
 
 #kids
 Green Gold TV
-Cartoon Network | Cartoon Network India
+Cartoon Network India | Cartoon Network
 Pogo
 Hungama TV
-Nickelodeon | Nickelodeon India
-Disney Channel | Disney Channel India
+Nickelodeon India | Nickelodeon
+Disney Channel India | Disney Channel
 =Sonic
-Discovery Kids | Discovery Kids India
+Discovery Kids India | Discovery Kids
 Mr Bean Animated
 
 #Infotainment
@@ -76,8 +76,8 @@ Adventure Earth
 Sony BBC Earth | BBC Earth US | BBC Earth
 History TV18
 Modern Marvels
-Discovery Turbo | Discovery Turbo India | Discovery Turbo Hindi
-Discovery Science | Discovery Science India | Discovery Science Hindi
+Discovery Turbo India | Discovery Turbo Hindi | Discovery Turbo
+Discovery Science India | Discovery Science Hindi | Discovery Science
 
 #Extras
 MotorVision
