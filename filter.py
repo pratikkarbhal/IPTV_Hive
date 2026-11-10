@@ -3,6 +3,7 @@ import shutil
 import subprocess
 import sys
 import threading
+import time
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
@@ -156,20 +157,39 @@ def hls_has_video(text):
     return None
 
 
-def only_audio(url):
-    """True only if ffprobe read the stream and found audio but no video."""
-    if not FFPROBE:
-        return False
-    cmd = [FFPROBE, "-v", "error", "-analyzeduration", "3000000", "-probesize", "3000000",
-           "-rw_timeout", "8000000", "-user_agent", HEADERS["User-Agent"],
-           "-show_entries", "stream=codec_type", "-of", "csv=p=0", url]
+def probe(url, seconds):
+    """Ask ffprobe what is inside the stream. Returns its lines, or None if it failed."""
+    cmd = [FFPROBE, "-v", "error", "-analyzeduration", str(seconds * 1_000_000),
+           "-probesize", str(seconds * 2_000_000), "-rw_timeout", str((seconds + 8) * 1_000_000),
+           "-user_agent", HEADERS["User-Agent"],
+           "-show_entries", "stream=codec_type,codec_name", "-of", "csv=p=0", url]
     with _probe_slots:
         try:
-            r = subprocess.run(cmd, capture_output=True, text=True, timeout=20)
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=seconds + 25)
         except Exception:
-            return False
-    types = set(r.stdout.split())
-    return r.returncode == 0 and "audio" in types and "video" not in types
+            return None
+    if r.returncode != 0:
+        return None
+    return [l.strip() for l in r.stdout.splitlines() if l.strip()]
+
+
+def only_audio(url):
+    """Returns what ffprobe saw (e.g. 'aac,audio') if the stream is audio only, else None.
+    A quick look first; a stream is only called audio-only if a longer look agrees."""
+    if not FFPROBE:
+        return None
+    seen = None
+    for seconds in (3, 12):
+        lines = probe(url, seconds)
+        if lines is None:
+            return None                      # could not read it - keep the stream
+        kinds = {t for l in lines for t in l.split(",")}
+        if "video" in kinds or "audio" not in kinds:
+            return None
+        seen = "; ".join(dict.fromkeys(lines))
+        if seconds == 3:
+            time.sleep(1)                    # let the server free the connection
+    return seen
 
 
 def is_alive(url):
@@ -187,15 +207,17 @@ def is_alive(url):
                 if b"#EXTM3U" not in chunk:
                     return False
                 if CHECK_VIDEO and hls_has_video(chunk.decode("utf-8", "replace")) is False:
-                    print(f"AUDIO-ONLY skipped: {url}")
+                    print(f"AUDIO-ONLY skipped (HLS playlist): {url}")
                     return False
                 return True
     except Exception:
         return False
     # not an HLS playlist (e.g. raw TS from Tvheadend): look inside the stream
-    if CHECK_VIDEO and only_audio(url):
-        print(f"AUDIO-ONLY skipped: {url}")
-        return False
+    if CHECK_VIDEO:
+        seen = only_audio(url)
+        if seen:
+            print(f"AUDIO-ONLY skipped: {url} (ffprobe saw: {seen})")
+            return False
     return True
 
 
