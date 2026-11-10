@@ -12,7 +12,6 @@ OUTPUT = "playlist.m3u"
 TIMEOUT = 10                   # seconds per stream check
 WORKERS = 20
 MAX_TRIES_PER_SOURCE = 8       # max candidates tested per channel per source
-CHECK_VIDEO = True             # skip streams that have audio but no video
 SNIFF_SLOTS = 4                # max parallel stream inspections (be gentle to small servers)
 SNIFF_BYTES = 786432           # give up looking for the stream table after this many bytes
 SNIFF_SECONDS = 8              # ...or after this many seconds
@@ -21,19 +20,17 @@ HEADERS = {"User-Agent": "Mozilla/5.0"}
 # ---- Codec filter (modular) --------------------------------------------
 # Set FILTER_CODECS = False to switch the filter off completely.
 FILTER_CODECS = True
-# Video codecs your player cannot decode. Add more names if needed (e.g. "hevc", "mpeg1video").
-BLOCKED_VIDEO_CODECS = {"mpeg2video"}
+# Video codecs your player cannot decode. Add more names if needed (e.g. "hevc").
+BLOCKED_VIDEO_CODECS = {"mpeg2video", "mpeg1video"}
 # -------------------------------------------------------------------------
 
 _cache, _lock = {}, threading.Lock()
 _sniff_slots = threading.BoundedSemaphore(SNIFF_SLOTS)
-VIDEO_CODECS = ("avc", "hvc", "hev", "mp4v", "vp0", "vp8", "vp9", "av01", "dvh", "mpeg")
 
 # MPEG-TS stream types (from the stream table at the start of every TS stream)
 TS_VIDEO = {0x01: "mpeg1video", 0x02: "mpeg2video", 0x10: "mpeg4video",
             0x1B: "h264", 0x20: "h264", 0x24: "hevc", 0x27: "hevc",
             0x42: "cavs", 0xD1: "dirac", 0xEA: "vc1"}
-TS_AUDIO = {0x03, 0x04, 0x0F, 0x11, 0x81, 0x82, 0x87, 0x8A}
 
 
 def read_list(path):
@@ -140,28 +137,6 @@ def get_entries(i, url):
         return _cache[i]
 
 
-def hls_has_video(text):
-    """HLS playlist: True = has video, False = audio only, None = can't tell."""
-    lines = [l.strip() for l in text.splitlines()]
-    variants = [l for l in lines if l.startswith("#EXT-X-STREAM-INF")]
-    if variants:
-        unknown = False
-        for v in variants:
-            if "RESOLUTION=" in v.upper():
-                return True
-            m = re.search(r'CODECS="([^"]*)"', v, re.I)
-            if not m:
-                unknown = True
-                continue
-            if any(c.strip().lower().startswith(VIDEO_CODECS) for c in m.group(1).split(",")):
-                return True
-        return None if unknown else False
-    segs = [l for l in lines if l and not l.startswith("#")]
-    if segs and all(re.search(r"\.(aac|mp3|m4a|ac3)(\?|$)", x, re.I) for x in segs):
-        return False
-    return None
-
-
 # ---- Stream inspection (pure Python, replaces ffprobe) -------------------
 def _ts_sync(buf):
     """Offset of the first 188-byte TS packet boundary, or -1."""
@@ -173,7 +148,7 @@ def _ts_sync(buf):
 
 def parse_ts(buf):
     """Read the stream table (PAT -> PMT) from MPEG-TS bytes.
-    Returns {"video": set_of_codec_names, "audio": bool} when found,
+    Returns {"video": set_of_codec_names} when found,
     "more" if the table is not in the data yet, "no" if this is not MPEG-TS."""
     if len(buf) < 188 * 3 + 1:
         return "more"
@@ -220,15 +195,13 @@ def parse_ts(buf):
         elif pid == pmt_pid and sec[0] == 0x02:     # PMT: list of streams
             i = 12 + (((sec[10] & 0x0F) << 8) | sec[11])
             end = 3 + length - 4
-            video, audio = set(), False
+            video = set()
             while i + 5 <= end:
                 st = sec[i]
                 if st in TS_VIDEO:
                     video.add(TS_VIDEO[st])
-                elif st in TS_AUDIO:
-                    audio = True
                 i += 5 + (((sec[i + 3] & 0x0F) << 8) | sec[i + 4])
-            return {"video": video, "audio": audio}
+            return {"video": video}
         else:
             sections.pop(pid, None)
     return "more"
@@ -236,7 +209,7 @@ def parse_ts(buf):
 
 def sniff_ts(read, first=b""):
     """Read a stream until its stream table shows up.
-    Returns {"video": set, "audio": bool}, or None if unknown (stream is then kept)."""
+    Returns {"video": set}, or None if unknown (stream is then kept)."""
     buf = bytearray(first)
     deadline = time.time() + SNIFF_SECONDS
     try:
@@ -300,7 +273,7 @@ def codec_ok(url, info):
 
 
 def is_alive(url):
-    inspect = CHECK_VIDEO or FILTER_CODECS
+    inspect = FILTER_CODECS                         # only look inside streams if the filter is on
     is_hls, info = False, None
     try:
         req = urllib.request.Request(url, headers=HEADERS)
@@ -315,9 +288,6 @@ def is_alive(url):
             if is_hls:
                 if b"#EXTM3U" not in chunk:
                     return False
-                if CHECK_VIDEO and hls_has_video(chunk.decode("utf-8", "replace")) is False:
-                    print(f"AUDIO-ONLY skipped (HLS playlist): {url}")
-                    return False
             elif inspect:
                 # raw TS (e.g. Tvheadend): keep reading the same connection
                 info = sniff_ts(r.read, chunk)
@@ -328,9 +298,6 @@ def is_alive(url):
         info = sniff_hls(url)
 
     if info:                                        # None = could not tell -> keep stream
-        if CHECK_VIDEO and info["audio"] and not info["video"]:
-            print(f"AUDIO-ONLY skipped: {url}")
-            return False
         if not codec_ok(url, info):                 # <-- only call into the codec filter
             return False
     return True
