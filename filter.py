@@ -19,7 +19,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 # ---- Codec filter (modular) --------------------------------------------
 # Set FILTER_CODECS = False to switch the filter off completely.
-FILTER_CODECS = False
+FILTER_CODECS = True
 # Video codecs your player cannot decode. Add more names if needed (e.g. "hevc", "mpeg1video").
 BLOCKED_VIDEO_CODECS = {"mpeg2video"}
 # -------------------------------------------------------------------------
