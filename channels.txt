@@ -59,6 +59,8 @@ Zee Cinema
 Manoranjan prime
 Manoranjan grand 
 Manoranjan movies
+The Movie Club
+The Movie Club +2
 
 #kids
 Green Gold TV
@@ -72,6 +74,7 @@ Disney Channel India | Disney Channel
 =Sonic
 Discovery Kids India | Discovery Kids
 Mr Bean Animated
+Takeshi's Castle
 
 #Infotainment
 Xplore | Xplore India
