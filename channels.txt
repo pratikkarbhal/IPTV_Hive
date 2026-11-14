@@ -57,9 +57,6 @@ Zee Cinema
 =Star Gold
 &pictures
 NH BollyFlix
-Manoranjan prime
-Manoranjan grand 
-Manoranjan movies
 The Movie Club
 The Movie Club +2
 
@@ -67,6 +64,7 @@ The Movie Club +2
 Green Gold TV
 Super Toons
 Sony Yay
+Manoranjan prime
 Cartoon Network India | Cartoon Network
 Pogo
 Hungama TV
