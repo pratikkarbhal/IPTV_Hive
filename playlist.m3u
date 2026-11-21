@@ -1,8 +1,9 @@
 #EXTM3U
 #EXTINF:-1 tvg-id="ABPMajha.in" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/400/-/ABP_Majha.png" group-title="News",ABP Majha
 https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/majha-livetv/master.m3u8
-#EXTINF:-1 tvg-id="SaamTV.in",Saam TV
-https://streams.tangotv.in/SAAMTV/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="SaamTV.in@SD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SAAM_TV/images/LOGO_HD/image.png" http-user-agent="#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Undefined",Saam TV (576p)
+#EXTVLCOPT:http-user-agent=#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+https://fta.ektv.in/live/650/master.m3u8
 #EXTINF:-1 tvg-id="News18Marathi.in@SD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NEWS18_LOKMAT/images/LOGO_HD/image.png" group-title="News",News18 Marathi (1080p)
 https://n18syndication.akamaized.net/bpk-tv/News18_Lokmat_NW18_MOB/output01/master.m3u8
 #EXTINF:-1 tvg-id="NDTVMarathi.in" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/400/-/NDTV_Marathi.png" group-title="News",NDTV Marathi
@@ -17,6 +18,8 @@ https://mumt05.tangotv.in/87NeALx2LOKSAAHI/index.m3u8
 https://d1msejlow1t3l4.cloudfront.net/fta/jaimaharashtra/playlist.m3u8
 #EXTINF:-1 tvg-id="RTIndia.in",RT India
 https://rt-india.rttv.com/dvr/rtindia/playlist.m3u8
+#EXTINF:-1 tvg-id="ZeeTalkies.in@HD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ZEE_TALKIES/images/LOGO_HD/LOGO_HD_image.png" group-title="Movies",Zee Talkies HD (1080p)
+http://116.90.120.149:8000/play/a116/index.m3u8
 #EXTINF:-1 tvg-id="ShemarooMarathiBana.in" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/400/-/Shemaroo_MarathiBana.png" group-title="Entertainment", Shemaroo Marathi bana
 https://airtelapp.shemaroo.com/marathibana/smil:marathibanaadp.smil/playlist.m3u8
 #EXTINF:-1 tvg-id="FaktMarathi.in@SD" tvg-logo="https://dtil.tmsimg.com/assets/s143038_ld_h15_aa.png?lock=720x540" http-user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Entertainment",Fakt Marathi (576p)
@@ -44,6 +47,8 @@ http://163.61.226.31:9981/stream/channelid/1571254341?profile=pass
 https://wurlsonypicturestv.global.transmit.live/hls/68deeb1c0238cda82df543dd/v1/spt_sonykal_1/lg_us/latest/main/hls/playlist.m3u8
 #EXTINF:-1 tvg-id="SonyWah.in@SD" tvg-logo="https://dtil.tmsimg.com/assets/s157974_ld_h15_aa.png?lock=720x540" group-title="Movies",Sony Wah (576p)
 http://163.61.226.31:9981/stream/channelid/1743466790?profile=pass
+#EXTINF:-1 tvg-id="SonySAB.in@HD" tvg-logo="https://dtil.tmsimg.com/assets/s159099_ld_h15_ab.png?lock=720x540" group-title="Entertainment",Sony SAB HD (1080p)
+http://116.90.120.149:8000/play/a128/index.m3u8
 #EXTINF:-1 tvg-id="SonyEntertainmentTelevision.in",Sony Entertainment Television
 http://38.96.178.205/SONYHD/index.m3u8
 #EXTINF:-1 tvg-id="ZeeSouthFlix.in",Zee South Flix
@@ -76,8 +81,8 @@ https://r2.amml.in/sony-yay/live.m3u8
 https://cdn.pishow.tv/ott/live/1474/master.m3u8
 #EXTINF:-1 tvg-id="CartoonNetworkHDPlus.in@HD",Cartoon Network HD+ (1080p)
 http://116.90.120.149:8000/play/a114/index.m3u8
-#EXTINF:-1 tvg-id="Nickelodeon.in@SD",Nickelodeon (576p) [Geo-blocked]
-http://dksmedia.tv/play/live.php?extension=ts&mac=00:1A:79:B6:60:3D&play_token=8FNt7g9GJ5&stream=1752848
+#EXTINF:-1 tvg-id="Nickelodeon.fr@SD" tvg-logo="https://i.imgur.com/E84jnP8.png" group-title="Kids",Nickelodeon (France) (720p)
+https://r.eu.cdn-redge.media/livehls/oeu/mt/live/nickelodeon/live.livx/playlist.m3u8
 #EXTINF:-1 tvg-id="DisneyChannel.in@SD" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_DISNEY_CHANNEL/images/LOGO_HD/image.png" group-title="Kids",Disney Channel (India) (576p)
 http://116.90.120.149:8000/play/a124/index.m3u8
 #EXTINF:-1 tvg-id="Sonic.in@SD",Sonic (576p)
